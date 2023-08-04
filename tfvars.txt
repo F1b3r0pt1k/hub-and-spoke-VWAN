@@ -1,0 +1,36 @@
+# Root Variables
+vwan_rg_name  = "corp-vwan-rg"
+vwan_location = "eastus"
+vwan_name     = "corp-vwan"
+base_name     = "coast-to-coast"
+
+# Hub Module Variables
+vhub_east_location       = "eastus"
+vhub_east_address_prefix = "10.100.0.0/23"
+vhub_west_location       = "westus"
+vhub_west_address_prefix = "10.200.0.0/23"
+
+# East Coast 1 Variables
+ec1_location           = "eastus"
+ec1_rg_name            = "atlanta-rg"
+ec1_vnet_address_space = ["10.101.0.0/16"]
+ec1_subnet_prefixes    = ["10.101.1.0/24"]
+admin_password         = "enterpasswordhere"
+
+# East Coast 2 Variables
+ec2_location           = "eastus2"
+ec2_rg_name            = "philidelphia-rg"
+ec2_vnet_address_space = ["10.102.0.0/16"]
+ec2_subnet_prefixes    = ["10.102.1.0/24"]
+
+# West Coast 1 Variables
+wc1_location           = "westus"
+wc1_rg_name            = "seattle-rg"
+wc1_vnet_address_space = ["10.201.0.0/16"]
+wc1_subnet_prefixes    = ["10.201.1.0/24"]
+
+# West Coast 2 Variables
+wc2_location           = "westus2"
+wc2_rg_name            = "portland-rg"
+wc2_vnet_address_space = ["10.202.0.0/16"]
+wc2_subnet_prefixes    = ["10.202.1.0/24"]
