@@ -61,3 +61,37 @@ resource "azurerm_linux_virtual_machine" "ec1_vm" {
     version   = "latest"
   }
 }
+
+resource "azurerm_network_security_group" "ec1_nsg" {
+  name                = "ec1-nsg"
+  location            = var.ec1_location
+  resource_group_name = var.ec1_rg_name
+
+  security_rule {
+    name                       = "AllowPing"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Icmp"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+    security_rule {
+    name                       = "AllowSSH"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+resource "azurerm_subnet_network_security_group_association" "ec1_nsg_association" {
+  subnet_id                 = azurerm_subnet.ec1_subnet.id
+  network_security_group_id = azurerm_network_security_group.ec1_nsg.id
+}

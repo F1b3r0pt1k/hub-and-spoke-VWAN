@@ -54,3 +54,26 @@ resource "azurerm_linux_virtual_machine" "ec2_vm" {
     version   = "latest"
   }
 }
+
+resource "azurerm_network_security_group" "ec2_nsg" {
+  name                = "ec2-nsg"
+  location            = var.ec2_location
+  resource_group_name = var.ec2_rg_name
+
+  security_rule {
+    name                       = "AllowPing"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Icmp"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+resource "azurerm_subnet_network_security_group_association" "ec2_nsg_association" {
+  subnet_id                 = azurerm_subnet.ec2_subnet.id
+  network_security_group_id = azurerm_network_security_group.ec2_nsg.id
+}

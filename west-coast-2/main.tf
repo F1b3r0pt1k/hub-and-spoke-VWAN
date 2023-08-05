@@ -54,3 +54,26 @@ resource "azurerm_linux_virtual_machine" "wc2_vm" {
     version   = "latest"
   }
 }
+
+resource "azurerm_network_security_group" "wc2_nsg" {
+  name                = "wc2-nsg"
+  location            = var.wc2_location
+  resource_group_name = var.wc2_rg_name
+
+  security_rule {
+    name                       = "AllowPing"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Icmp"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+resource "azurerm_subnet_network_security_group_association" "wc2_nsg_association" {
+  subnet_id                 = azurerm_subnet.wc2_subnet.id
+  network_security_group_id = azurerm_network_security_group.wc2_nsg.id
+}
