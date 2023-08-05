@@ -55,6 +55,7 @@ resource "azurerm_linux_virtual_machine" "ec2_vm" {
   }
 }
 
+# Add NSG to subnet
 resource "azurerm_network_security_group" "ec2_nsg" {
   name                = "ec2-nsg"
   location            = var.ec2_location

@@ -55,6 +55,7 @@ resource "azurerm_linux_virtual_machine" "wc1_vm" {
   }
 }
 
+# Add NSG to subnet
 resource "azurerm_network_security_group" "wc1_nsg" {
   name                = "wc1-nsg"
   location            = var.wc1_location
